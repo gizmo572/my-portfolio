@@ -1,10 +1,8 @@
-import Image from "next/image";
 import { useTheme } from "@/components/ThemeProvider";
+import { PortfolioBody } from "@/components/portfolio-body";
 
 export default function Home() {
   return (
-    <div>
-      HELLO WORLD!!!
-    </div>
+    <PortfolioBody />
   );
 }
