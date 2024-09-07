@@ -1,7 +1,6 @@
-import { useTheme } from "@/components/ThemeProvider";
 import { PortfolioBody } from "@/components/portfolio-body";
 
-export default function Home() {
+export default function Page() {
   return (
     <PortfolioBody />
   );

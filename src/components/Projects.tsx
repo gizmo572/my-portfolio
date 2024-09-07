@@ -1,23 +1,59 @@
+import { useRef } from "react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { projectsFlyIn, stuckInCeilingAnimation } from "./features/animations";
 
 const projectList = [
   {
     title: "Hot Nav",
     description: "A really cool thing",
     overview: "the coolest thing?"
+  },
+  {
+    title: "URL Smart Scan",
+    description: "Whoa....",
+    overview: "possibly even cooler??"
+  },
+  {
+    title: "Fitness Tracker",
+    description: "Let's git it SON!",
+    overview: "maximum basedity acheived"
+  },
+  {
+    title: "Portfolio",
+    description: "Portfolioception",
+    overview: "this is my portfolio this is my portfolio this is my portfolio this is my portfolio this is my portfolio this is my portfolio"
   }
 ]
 
 
 export function Projects() {
 
+  const projectCardsRef = useRef([])
+
+  useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (!prefersReducedMotion) {
+      const t1 = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      projectsFlyIn(t1, projectCardsRef.current)
+    } else {
+      console.log('we never reach the else block')
+      gsap.set(projectCardsRef.current, { opacity: 1 })
+    }
+  }, [])
+
   return (
     <>
       {projectList.map((project, idx) => {
         const { title, description, overview } = project;
         return (
-          <Card key={idx} className={`bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-xl animate-fade-in animation-delay-${idx * 200}`}>
+          <Card 
+            key={project.title}
+            ref={(el) => projectCardsRef.current[idx] = el}
+            className={`bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:shadow-xl animate-fade-in animation-delay-${idx * 200 + 200}`}>
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-primary dark:text-gray-100">{title}</CardTitle>
               <CardDescription className="text-gray-600 dark:text-gray-400">{description}</CardDescription>

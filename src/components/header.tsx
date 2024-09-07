@@ -18,7 +18,7 @@ export function Header() {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/" className="text-2xl font-bold hover:text-primary transition-colors duration-200">
-            Portfolio
+            Nick&apos;s Portfolio
           </Link>
         </div>
         <nav className="hidden md:flex space-x-4">
