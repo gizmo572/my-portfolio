@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { projectsFlyIn, stuckInCeilingAnimation } from "./features/animations";
+import { projectsFlyIn } from "./features/animations";
 
 const projectList = [
   {
@@ -31,16 +31,15 @@ const projectList = [
 
 export function Projects() {
 
-  const projectCardsRef = useRef([])
+  const projectCardsRef = useRef<HTMLDivElement[]>([])
 
   useGSAP(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (!prefersReducedMotion) {
-      const t1 = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const t1 = gsap.timeline({delay: 3.5, defaults: { ease: 'power3.out' } });
       projectsFlyIn(t1, projectCardsRef.current)
     } else {
-      console.log('we never reach the else block')
       gsap.set(projectCardsRef.current, { opacity: 1 })
     }
   }, [])
@@ -52,7 +51,9 @@ export function Projects() {
         return (
           <Card 
             key={project.title}
-            ref={(el) => projectCardsRef.current[idx] = el}
+            ref={(el) => {
+              if (el) projectCardsRef.current[idx] = el
+            }}
             className={`bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:shadow-xl animate-fade-in animation-delay-${idx * 200 + 200}`}>
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-primary dark:text-gray-100">{title}</CardTitle>

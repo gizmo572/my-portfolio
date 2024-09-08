@@ -1,5 +1,5 @@
 
-export const projectsFlyIn = (gsapTimelineInstance, projectRef) => {
+export const projectsFlyIn = (gsapTimelineInstance: gsap.core.Timeline, projectRef: HTMLDivElement[]) => {
   let axis = 'x', negative = true;
 
   for (const project of projectRef) {
@@ -15,7 +15,7 @@ export const projectsFlyIn = (gsapTimelineInstance, projectRef) => {
 }
 
 
-export const stuckInCeilingAnimation = (gsapTimelineInstance, ref1, ref2) => {
+export const stuckInCeilingAnimation = (gsapTimelineInstance: gsap.core.Timeline, ref1: HTMLDivElement, ref2: HTMLDivElement) => {
   gsapTimelineInstance.to(ref1, {
     y: -500,
     stagger: 1,

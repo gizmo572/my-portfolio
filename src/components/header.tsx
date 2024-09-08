@@ -1,13 +1,59 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import Link from 'next/link'
 import { useTheme } from './ThemeProvider'
+import { useGSAP } from '@gsap/react'
+import { gsap } from 'gsap';
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { theme, toggleTheme } = useTheme()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const navRef = useRef<HTMLAnchorElement[]>([]);
+  const headerRef = useRef<HTMLAnchorElement>(null)
+  const contactRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (!prefersReducedMotion) {
+      const t1 = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      t1.from(navRef.current[1], {
+        x: -500,
+        y: -500,
+        duration: 1
+      }, .5)
+      t1.from(navRef.current[0], {
+        x: -500,
+        y: -500,
+        duration: 1
+      }, 1)
+
+      t1.from(navRef.current[2], {
+        x: 500,
+        y: -500,
+        duration: 1
+      }, .5)
+      t1.from(navRef.current[3], {
+        x: 500,
+        y: -500,
+        duration: 1
+      }, 1)
+      t1.from(headerRef.current, {
+        x: -500,
+        y: -500,
+        duration: 1
+      }, 1.5)
+      t1.from(contactRef.current, {
+        x: 500,
+        y: -500,
+        duration: 1
+      }, 1.5)
+
+    }
+  },[])
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -17,13 +63,16 @@ export function Header() {
     <header className="bg-background text-foreground shadow-md dark:bg-gray-800 dark:text-white transition-colors duration-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
-          <Link href="/" className="text-2xl font-bold hover:text-primary transition-colors duration-200">
+          <Link ref={headerRef} href="/" className="text-2xl font-bold hover:text-primary transition-colors duration-200">
             Nick&apos;s Portfolio
           </Link>
         </div>
         <nav className="hidden md:flex space-x-4">
-          {['Home', 'Projects', 'About', 'Blog'].map((item) => (
+          {['Home', 'Projects', 'About', 'Blog'].map((item, idx) => (
             <Link
+              ref={(el) => {
+                if (el) navRef.current[idx] = el
+              }}
               key={item}
               href={`/${item.toLowerCase()}`}
               className="hover:text-primary transition-colors duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
@@ -32,7 +81,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className="hidden md:flex items-center space-x-4">
+        <div ref={contactRef} className="hidden md:flex items-center space-x-4">
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
