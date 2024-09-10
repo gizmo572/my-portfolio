@@ -3,9 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "next-themes"
-// import { ThemeProvider } from "@/components/ThemeProvider";
 import { HotNavigationProvider } from "hot-nav";
-// import { ThemeEffect } from "@/components/theme-effect";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,16 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en suppressHydrationWarning">
       <body
-        className={`${geistSans.variable} ${geistMono.variable } antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable } antialiased bg-background text-foreground`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider defaultTheme="system" enableSystem>
           <HotNavigationProvider addCustomStyles={false} defaultHotKeysOn={false} >
-            <div className="bg-background text-foreground min-h-screen">
-              <Header />
-              {children}
-            </div>
+            <Header />
+            {children}
           </HotNavigationProvider>
         </ThemeProvider>
       </body>
