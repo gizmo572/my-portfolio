@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { projectsFlyIn } from "./features/animations";
+import { onLoadSimultaneousAnimation, projectsFlyIn } from "./features/animations";
 
 const projectList = [
   {
@@ -37,8 +37,7 @@ export function Projects() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (!prefersReducedMotion) {
-      const t1 = gsap.timeline({delay: 3.5, defaults: { ease: 'power3.out' } });
-      projectsFlyIn(t1, projectCardsRef.current)
+      onLoadSimultaneousAnimation(projectCardsRef.current)
     } else {
       gsap.set(projectCardsRef.current, { opacity: 1 })
     }
@@ -54,16 +53,21 @@ export function Projects() {
             ref={(el) => {
               if (el) projectCardsRef.current[idx] = el
             }}
-            className={`bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:shadow-xl animate-fade-in animation-delay-${idx * 200 + 200}`}>
+            className={`bg-card text-card-foreground border-border hover:shadow-xl animate-fade-in animation-delay-${idx * 200 + 200}`}>
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-primary dark:text-gray-100">{title}</CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-400">{description}</CardDescription>
+              <CardDescription className="text-muted-foreground">{description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-700 dark:text-gray-300">{overview}</p>
+              <p className="text-foreground">{overview}</p>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" className="bg-primary/10 text-primary hover:bg-primary/20 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"><a href={''}>View Project</a></Button>
+            <Button 
+                variant="outline" 
+                className="bg-primary text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors duration-200"
+              >
+                <a href={''} className="no-underline">View Project</a>
+              </Button>
             </CardFooter>
           </Card>
           )

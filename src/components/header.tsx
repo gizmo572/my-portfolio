@@ -1,56 +1,32 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { Menu, X, Sun, Moon } from 'lucide-react'
-import Link from 'next/link'
-import { useTheme } from './ThemeProvider'
+import { usePathname } from 'next/navigation'
+import { Menu, X } from 'lucide-react'
 import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap';
+import { HotLink } from 'hot-nav'
+import ThemeSwitch from './theme-switch';
+import { onLoadSimultaneousHeader } from './features/animations';
+
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Projects', path: '/projects' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
+]
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  const navRef = useRef<HTMLAnchorElement[]>([]);
-  const headerRef = useRef<HTMLAnchorElement>(null)
-  const contactRef = useRef<HTMLDivElement>(null)
+  const navRef = useRef<HTMLDivElement[]>([]);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useGSAP(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (!prefersReducedMotion) {
-      const t1 = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      t1.from(navRef.current[1], {
-        x: -500,
-        y: -500,
-        duration: 1
-      }, .5)
-      t1.from(navRef.current[0], {
-        x: -500,
-        y: -500,
-        duration: 1
-      }, 1)
-
-      t1.from(navRef.current[2], {
-        x: 500,
-        y: -500,
-        duration: 1
-      }, .5)
-      t1.from(navRef.current[3], {
-        x: 500,
-        y: -500,
-        duration: 1
-      }, 1)
-      t1.from(headerRef.current, {
-        x: -500,
-        y: -500,
-        duration: 1
-      }, 1.5)
-      t1.from(contactRef.current, {
-        x: 500,
-        y: -500,
-        duration: 1
-      }, 1.5)
+      onLoadSimultaneousHeader(navRef.current, headerRef.current, contactRef.current);
 
     }
   },[])
@@ -60,51 +36,46 @@ export function Header() {
   }
 
   return (
-    <header className="bg-background text-foreground shadow-md dark:bg-gray-800 dark:text-white transition-colors duration-200">
+    <header className="bg-background text-foreground shadow-md transition-colors duration-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <Link ref={headerRef} href="/" className="text-2xl font-bold hover:text-primary transition-colors duration-200">
+        <div ref={headerRef} className="flex items-center">
+          <HotLink href="/" className="text-2xl font-bold hover:text-primary transition-colors duration-200">
             Nick&apos;s Portfolio
-          </Link>
+          </HotLink>
         </div>
         <nav className="hidden md:flex space-x-4">
-          {['Home', 'Projects', 'About', 'Blog'].map((item, idx) => (
-            <Link
-              ref={(el) => {
+          {navItems.map((item, idx) => (
+            <div
+              ref={(el: HTMLDivElement) => {
                 if (el) navRef.current[idx] = el
               }}
-              key={item}
-              href={`/${item.toLowerCase()}`}
-              className="hover:text-primary transition-colors duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
+              key={item.name}
             >
-              {item}
-            </Link>
+              <HotLink
+                href={item.path}
+                className={`px-3 py-2 rounded-md transition-colors duration-200 ${
+                  pathname === item.path
+                    ? 'bg-primary text-primary-foreground font-medium'
+                    : 'hover:bg-secondary/50 text-foreground'
+                }`}
+              >
+                {item.name}
+              </HotLink>
+            </div>
           ))}
         </nav>
         <div ref={contactRef} className="hidden md:flex items-center space-x-4">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-          <Link
+          <ThemeSwitch />
+          <HotLink
             href="/contact"
             className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90 transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
           >
             Contact Me
-          </Link>
+          </HotLink>
         </div>
         <div className="md:hidden flex items-center space-x-4">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-          <button onClick={toggleMenu} className="transition-transform duration-200 hover:scale-110">
+          <ThemeSwitch />
+          <button onClick={toggleMenu} className="transition-transform duration-200 hover:scale-110" aria-label="Toggle menu">
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -112,21 +83,25 @@ export function Header() {
       {isMenuOpen && (
         <div className="md:hidden">
           <nav className="flex flex-col space-y-4 px-4 py-2">
-            {['Home', 'Projects', 'About', 'Blog'].map((item) => (
-              <Link
-                key={item}
-                href={`/${item.toLowerCase()}`}
-                className="hover:text-primary transition-colors duration-200"
+            {navItems.map((item) => (
+              <HotLink
+                key={item.name}
+                href={item.path}
+                className={`block px-3 py-2 rounded-md transition-colors duration-200 ${
+                  pathname === item.path
+                    ? 'bg-primary text-primary-foreground font-medium'
+                    : 'hover:bg-secondary/50 text-foreground'
+                }`}
               >
-                {item}
-              </Link>
+                {item.name}
+              </HotLink>
             ))}
-            <Link
+            <HotLink
               href="/contact"
               className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90 transition-colors duration-200 inline-block"
             >
               Contact Me
-            </Link>
+            </HotLink>
           </nav>
         </div>
       )}
