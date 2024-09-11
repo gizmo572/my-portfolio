@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "next-themes"
 import { HotNavigationProvider } from "hot-nav";
+import CustomCursor from "@/components/custom-cursor";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,11 +31,13 @@ export default function RootLayout({
     <html lang="en suppressHydrationWarning">
       <body
         className={`${geistSans.variable} ${geistMono.variable } antialiased bg-background text-foreground`}
-      >
+        >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <HotNavigationProvider addCustomStyles={false} defaultHotKeysOn={false} >
-            <Header />
-            {children}
+            <CustomCursor>
+              <Header />
+              {children}
+            </CustomCursor>
           </HotNavigationProvider>
         </ThemeProvider>
       </body>
