@@ -21,7 +21,7 @@ interface CustomCursorProps extends WrapperProps {
   innerSize?: number;
   outerSize?: number;
   outerScale?: number;
-  innerScale?: Number;
+  innerScale?: number;
 }
 
 

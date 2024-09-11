@@ -12,7 +12,7 @@ export const SkillsSection = () => {
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
-    let tl = gsap.timeline({
+    const tl = gsap.timeline({
       scrollTrigger: {
           trigger: skillsHeaderRef.current,
           start: 'top bottom', // when the top of the trigger hits the top of the viewport
@@ -28,9 +28,11 @@ export const SkillsSection = () => {
     for (const skill of skillsRef.current) {
       let rotate = Math.random() * 1801;
       if (count % 2 === 0) rotate *= -1;
+      count++;
 
       tl.from(skill, {
         y: -2000,
+        opacity: 0,
         duration: 2,
         rotate: rotate,
         ease: ease
@@ -49,11 +51,12 @@ export const SkillsSection = () => {
       <div className="flex flex-wrap justify-center gap-2">
         {['React', 'Node.js', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Next.js', 'Python', 'AWS', 'Docker', 'PostgreSQL', 'MongoDB', 'CI/CD'].map((skill, idx) => (
           <div
+            key={skill} 
             ref={(el) => {
               if (el) skillsRef.current[idx] = el 
             }}   
           >
-            <Badge key={skill} variant="secondary" className={`text-lg py-2 px-4 bg-secondary text-secondary-foreground transition-all duration-200 hover:scale-105 animate-fade-in animation-delay-${100} rounded-full`}>
+            <Badge variant="secondary" className={`text-lg py-2 px-4 bg-secondary text-secondary-foreground transition-all duration-200 hover:scale-105 animate-fade-in animation-delay-${100} rounded-full`}>
               {skill}
             </Badge>
           </div>

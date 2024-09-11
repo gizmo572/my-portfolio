@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { onLoadSimultaneousAnimation, projectsFlyIn } from "./features/animations";
+import { onLoadSimultaneousAnimation } from "./features/animations";
 
 const projectList = [
   {

@@ -4,7 +4,6 @@ import { useRef, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Badge } from "@/components/ui/badge"
 import { Projects } from './Projects'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
@@ -49,6 +48,12 @@ export function PortfolioBody() {
           Passionate about creating efficient, scalable, and user-friendly web applications. 
           With expertise in React, Node.js, and cloud technologies, I bring ideas to life.
         </p>
+      </section>
+
+      {/* Work Experience Section */}
+      <section
+      className='mb-16'>
+
       </section>
 
       {/* Featured Projects Section */}
