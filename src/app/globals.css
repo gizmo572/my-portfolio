@@ -2,90 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #D6FFE7;
-  --foreground: #293F14;
-}
-
-[data-theme='dark'] {
-    --background: #293F14;
-    --foreground: #D6FFE7;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-
 @layer base {
   :root {
-    --background: 89 69% 16%; /* pakistan-green */
-    --foreground: 145 100% 92%; /* spring-green */
+    --background: 51 16% 98%; /* FEFAE0 */
+    --foreground: 77 15% 38%; /* 5F6F52 */
 
-    --card: 89 69% 16%; /* pakistan-green */
-    --card-foreground: 145 100% 92%; /* spring-green */
- 
-    --popover: 89 69% 16%; /* pakistan-green */
-    --popover-foreground: 145 100% 92%; /* spring-green */
- 
-    --primary: 132 100% 40%; /* kelly-green */
-    --primary-foreground: 89 69% 16%; /* pakistan-green */
- 
-    --secondary: 93 83% 30%; /* office-green */
-    --secondary-foreground: 145 100% 92%; /* spring-green */
- 
-    --muted: 93 83% 30%; /* office-green */
-    --muted-foreground: 145 74% 70%; /* malachite */
- 
-    --accent: 132 100% 40%; /* kelly-green */
-    --accent-foreground: 89 69% 16%; /* pakistan-green */
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 145 100% 92%; /* spring-green */
+    --card: 46 81% 94%; /* F9EBC7 */
+    --card-foreground: 77 15% 38%; /* 5F6F52 */
 
-    --border: 93 83% 30%; /* office-green */
-    --input: 93 83% 30%; /* office-green */
-    --ring: 132 100% 40%; /* kelly-green */
- 
+    --popover: 51 16% 98%; /* FEFAE0 */
+    --popover-foreground: 77 15% 38%; /* 5F6F52 */
+
+    --primary: 77 15% 38%; /* 5F6F52 */
+    --primary-foreground: 51 16% 98%; /* FEFAE0 */
+
+    --secondary: 80 20% 62%; /* A9B388 */
+    --secondary-foreground: 77 15% 38%; /* 5F6F52 */
+
+    --muted: 46 81% 94%; /* F9EBC7 */
+    --muted-foreground: 26 27% 58%; /* B99470 */
+
+    --accent: 26 27% 58%; /* B99470 */
+    --accent-foreground: 51 16% 98%; /* FEFAE0 */
+
+    --destructive: 21 73% 44%; /* C4661F */
+    --destructive-foreground: 51 16% 98%; /* FEFAE0 */
+
+    --border: 80 20% 62%; /* A9B388 */
+    --input: 80 20% 62%; /* A9B388 */
+    --ring: 77 15% 38%; /* 5F6F52 */
+
     --radius: 0.5rem;
   }
- 
+
   .dark {
-    --background: 145 100% 92%; /* spring-green */
-    --foreground: 89 69% 16%; /* pakistan-green */
- 
-    --card: 145 100% 92%; /* spring-green */
-    --card-foreground: 89 69% 16%; /* pakistan-green */
- 
-    --popover: 145 100% 92%; /* spring-green */
-    --popover-foreground: 89 69% 16%; /* pakistan-green */
- 
-    --primary: 132 100% 30%; /* kelly-green */
-    --primary-foreground: 145 100% 92%; /* spring-green */
- 
-    --secondary: 93 83% 23%; /* office-green */
-    --secondary-foreground: 145 100% 92%; /* spring-green */
- 
-    --muted: 93 83% 23%; /* office-green */
-    --muted-foreground: 145 74% 40%; /* malachite */
- 
-    --accent: 132 100% 30%; /* kelly-green */
-    --accent-foreground: 145 100% 92%; /* spring-green */
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 145 100% 92%; /* spring-green */
- 
-    --border: 93 83% 23%; /* office-green */
-    --input: 93 83% 23%; /* office-green */
-    --ring: 132 100% 30%; /* kelly-green */
+    --background: 77 15% 38%; /* 5F6F52 */
+    --foreground: 51 16% 98%; /* FEFAE0 */
+
+    --card: 80 20% 62%; /* A9B388 */
+    --card-foreground: 51 16% 98%; /* FEFAE0 */
+
+    --popover: 77 15% 38%; /* 5F6F52 */
+    --popover-foreground: 51 16% 98%; /* FEFAE0 */
+
+    --primary: 51 16% 98%; /* FEFAE0 */
+    --primary-foreground: 77 15% 38%; /* 5F6F52 */
+
+    --secondary: 46 81% 94%; /* F9EBC7 */
+    --secondary-foreground: 77 15% 38%; /* 5F6F52 */
+
+    --muted: 26 27% 58%; /* B99470 */
+    --muted-foreground: 46 81% 94%; /* F9EBC7 */
+
+    --accent: 21 73% 44%; /* C4661F */
+    --accent-foreground: 51 16% 98%; /* FEFAE0 */
+
+    --destructive: 21 66% 28%; /* 783D19 */
+    --destructive-foreground: 51 16% 98%; /* FEFAE0 */
+
+    /* --border: none; B99470 */
+    --input: 26 27% 58%; /* B99470 */
+    --ring: 46 81% 94%; /* F9EBC7 */
   }
 }
 
@@ -95,6 +72,12 @@ body {
   }
   body {
     @apply bg-background text-foreground;
-    @apply transition-colors duration-200;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }

@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable } antialiased bg-background text-foreground`}
       >
-        <ThemeProvider defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <HotNavigationProvider addCustomStyles={false} defaultHotKeysOn={false} >
             <Header />
             {children}
