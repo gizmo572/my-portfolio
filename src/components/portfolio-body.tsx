@@ -9,6 +9,7 @@ import { Projects } from './Projects'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { onLoadAnimation } from './features/animations'
+import { SkillsSection } from './skills-section'
 
 export function PortfolioBody() {
   const [name, setName] = useState('')
@@ -39,7 +40,7 @@ export function PortfolioBody() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-background text-foreground">
+    <>
       {/* Introduction Section */}
       <section className="mb-16 text-center">
         <h1 ref={nameRef} className="text-4xl font-bold mb-4 text-primary animate-fade-in">Nicholas Cushman</h1>
@@ -58,17 +59,7 @@ export function PortfolioBody() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center text-primary">Skills</h2>
-        <div className="flex flex-wrap justify-center gap-2">
-          {['React', 'Node.js', 'TypeScript', 'Next.js', 'GraphQL', 'AWS', 'Docker', 'CI/CD'].map((skill) => (
-            <Badge key={skill} variant="secondary" className={`text-lg py-2 px-4 bg-secondary text-secondary-foreground transition-all duration-200 hover:scale-105 animate-fade-in animation-delay-${100} rounded-full`}>
-              {skill}
-            </Badge>
-          ))}
-        </div>
-      </section>
+      <SkillsSection />
 
       {/* Contact Form Section */}
       <section>
@@ -108,6 +99,6 @@ export function PortfolioBody() {
           <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-kelly-green transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg">Send Message</Button>
         </form>
       </section>
-    </div>
+    </>
   )
 }
