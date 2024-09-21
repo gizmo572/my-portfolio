@@ -66,6 +66,11 @@
   }
 }
 
+html, body {
+  @apply bg-cover bg-fixed bg-center bg-no-repeat;
+  background-image: url('/abstract_background_with_low_poly_technology_design_3004_generated.jpg');
+}
+
 @layer base {
   * {
     @apply border-border cursor-none;

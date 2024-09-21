@@ -36,7 +36,7 @@ export function Header() {
   }
 
   return (
-    <header className="bg-background text-foreground shadow-md transition-colors duration-200">
+    <header className="text-foreground transition-colors duration-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div ref={headerRef} className="flex items-center">
           <HotLink href="/" className="text-2xl font-bold hover:text-primary transition-colors duration-200">
