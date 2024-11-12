@@ -10,7 +10,6 @@ import { projectData } from "@/data/content";
 
 
 export default function Projects() {
-  // const projectsHeaderRef = useRef<HTMLHeadingElement>(null);
   const projectCardsRef = useRef<HTMLDivElement[]>([])
   
   useGSAP(() => {
