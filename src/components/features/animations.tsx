@@ -1,24 +1,91 @@
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 
+export const testAnimation = (cardRef: HTMLDivElement[]) => {
 
+  gsap.registerPlugin(ScrollTrigger)
+    const t1 = gsap.timeline({
+      scrollTrigger: {
+          trigger: cardRef[0],
+          start: 'top 75%', // when the top of the trigger hits the bottom 25% mark of the viewport
+          end: '+=0', // end immediately after starting, so it doesn't stretch beyond the start
+          scrub: false, // disable scrubbing, so the animation happens all at once
+          once: true // trigger the animation only once
+      }
+    });
 
-export const onLoadSimultaneousAnimation = (projectRef: HTMLDivElement[]) => {
-  const t1 = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    for (const card of cardRef) {
+      t1.from(card, {
+        opacity: 0,
+        duration: 3
+      }, 0);
+    }
+
+}
+
+export const onHoverBobAnimation = (cardRef: HTMLDivElement) => {
+  
+  let  hover = false;
+  cardRef.addEventListener("mouseenter", hoverOn);
+  cardRef.addEventListener("mouseleave", hoverOff);
+  const tween = gsap.to(cardRef, {
+    duration:1, 
+    y: -3,
+    paused:true,                                
+    repeat:1, 
+    yoyo:true, 
+    ease:"sine.inOut",
+    onComplete:checkHover                                
+  });
+  
+  function hoverOn() {
+    hover = true
+    console.log(tween.totalProgress())
+    tween.play()
+    if(tween.totalProgress() == 1){
+      tween.restart()
+    }
+  }
+  
+  function hoverOff() {
+    hover = false
+  }
+  
+  function checkHover() {
+    if(hover){
+      tween.restart()
+    }
+  }
+}
+
+export const onLoadSimultaneousAnimation = (cardRef: HTMLDivElement[]) => {
+
+  gsap.registerPlugin(ScrollTrigger)
+    const t1 = gsap.timeline({
+      scrollTrigger: {
+          trigger: cardRef[0],
+          start: 'top 75%', // when the top of the trigger hits the bottom 25% mark of the viewport
+          end: '+=0', // end immediately after starting, so it doesn't stretch beyond the start
+          scrub: false, // disable scrubbing, so the animation happens all at once
+          once: true // trigger the animation only once
+      }
+    });
+  // const t1 = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
   let left = true, top = true;
 
-  for (const project of projectRef) {
-    t1.from(project, {
+  for (const card of cardRef) {
+    t1.from(card, {
       x: Number(`${left ? '-' : ''}500`),
       y: Number(`${top ? '0' : '500'}`),
       opacity: 0,
-      duration: 2.5
+      duration: 2
     }, 0);
 
     if (left && top) {
-       left = false;
+      left = false;
     } else if (!left && top) {
       top = false;
       left = true;

@@ -1,0 +1,47 @@
+.sphere {
+	perspective: 980px;
+	border-radius: 50%;
+	animation: hover 2s ease 0s infinite;
+}
+
+.sphere:after {
+	content: '';
+	position: absolute;
+	left: 25%;
+	top: 50%;
+	z-index: -1;
+	box-shadow: 0 100px 20px rgba(251, 251, 251, 0.5);
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	transform: rotateX(70deg);
+	animation: hover-shadow 2s ease 0s infinite;
+}
+
+@keyframes hover {
+	0% {
+		transform: translate(0, -10px);
+	}
+
+	50% {
+		transform: translate(0, -20px);
+	}
+
+	100% {
+		transform: translate(0, -10px);
+	}
+}
+
+@keyframes hover-shadow {
+	0% {
+		box-shadow: 0 100px 30px rgba(251, 251, 251, 0.5);
+	}
+
+	50% {
+		box-shadow: 0 120px 10px rgba(251, 251, 251, 0.5);
+	}
+
+	100% {
+		box-shadow: 0 100px 30px rgba(251, 251, 251, 0.5);
+	}
+}

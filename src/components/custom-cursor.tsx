@@ -51,7 +51,7 @@ const CustomCursor: React.FC<CustomCursorProps> = ({
     if (typeof window == 'undefined') return;
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= window.innerHeight * 0.75);
     };
 
     window.addEventListener('resize', handleResize);
@@ -151,12 +151,10 @@ const CustomCursor: React.FC<CustomCursorProps> = ({
     // the cursor shadow is removed on-hover over these elements 
     // TODO: make 'clickables' a prop with a default value
     const clickables = document.querySelectorAll(
-      'a, input, label[for], select, button, .link, .text-input, [data-radix-collection-item]',
+      'a, input, label[for], select, button, textarea, .link, .text-input, [data-radix-collection-item]',
     );
     clickables.forEach(element => {
       const el = element as HTMLElement;
-
-      el.style.cursor = 'none';
 
       el.addEventListener('mouseover', () => {
         setIsActive(true);

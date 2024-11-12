@@ -1,16 +1,21 @@
+'use client';
+
 import { useGSAP } from "@gsap/react";
-import { Badge } from "./ui/badge";
 import { useRef } from "react"
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import './bounce.css';
+import Section from "./ui/section-wrapper";
+import { DefaultSkills, Skill } from "@/data/content";
+import SkillIcon from "./skill-icon";
 
 
-
-export const SkillsSection = () => {
+export default function Skills({ skills=DefaultSkills, labels=false, bounceEntry=true }: { skills?: Skill[], labels?: boolean, bounceEntry?: boolean })  {
   const skillsHeaderRef = useRef<HTMLHeadingElement>(null);
   const skillsRef = useRef<HTMLDivElement[]>([])
 
   useGSAP(() => {
+    if (!bounceEntry) return;
     gsap.registerPlugin(ScrollTrigger)
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -31,9 +36,9 @@ export const SkillsSection = () => {
       count++;
 
       tl.from(skill, {
-        y: -2000,
+        y: -3000,
         opacity: 0,
-        duration: 2,
+        duration: 2.5,
         rotate: rotate,
         ease: ease
       }, Math.random() / 5)
@@ -46,22 +51,21 @@ export const SkillsSection = () => {
   })
   
   return (
-    <section className="mb-16">
-      <h2 ref={skillsHeaderRef} className="text-3xl font-bold mb-8 text-center text-primary">Skills</h2>
-      <div className="flex flex-wrap justify-center gap-2">
-        {['React', 'Node.js', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Next.js', 'Python', 'AWS', 'Docker', 'PostgreSQL', 'MongoDB', 'CI/CD'].map((skill, idx) => (
-          <div
-            key={skill} 
-            ref={(el) => {
-              if (el) skillsRef.current[idx] = el 
-            }}   
-          >
-            <Badge variant="secondary" className={`text-lg py-2 px-4 bg-secondary text-secondary-foreground transition-all duration-200 hover:scale-105 animate-fade-in animation-delay-${100} rounded-full`}>
-              {skill}
-            </Badge>
-          </div>
-        ))}
+    <Section _id="Skills" _ref={skillsHeaderRef}>
+      <div className='flex flex-wrap justify-center gap-6 md:gap-16 my-10 w-full'>
+          {skills.map((skill, index) => (
+          <SkillIcon 
+            key={skill.title}
+            skill={skill}
+            index={index}
+            setRef={(el: HTMLDivElement | null) => {
+              if (el) skillsRef.current[index] = el
+            }}
+
+            labels={labels} />
+          
+          ))}
       </div>
-    </section>
+    </Section>
   )
 }

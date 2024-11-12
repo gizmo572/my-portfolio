@@ -4,67 +4,81 @@
 
 @layer base {
   :root {
-    --background: 51 16% 98%; /* FEFAE0 */
-    --foreground: 77 15% 38%; /* 5F6F52 */
+    --background: 210 100% 95%; /* Light Sky Blue */
+    --foreground: black; /* Black */
 
-    --card: 46 81% 94%; /* F9EBC7 */
-    --card-foreground: 77 15% 38%; /* 5F6F52 */
+    --card: 200 80% 90%; /* Soft Blue */
+    --card-foreground: 220 60% 20%;
+    
+    --popover: 210 100% 95%; /* Light Sky Blue */
+    --popover-foreground: 240 100% 50%; /* BLue */
 
-    --popover: 51 16% 98%; /* FEFAE0 */
-    --popover-foreground: 77 15% 38%; /* 5F6F52 */
+    --primary: black; /* Black */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --primary: 77 15% 38%; /* 5F6F52 */
-    --primary-foreground: 51 16% 98%; /* FEFAE0 */
+    --secondary: 180 100% 80%; /* Aqua */
+    --secondary-foreground: 220 60% 20%; /* Dark Navy */
 
-    --secondary: 80 20% 62%; /* A9B388 */
-    --secondary-foreground: 77 15% 38%; /* 5F6F52 */
+    --muted: 200 80% 90%; /* Soft Blue */
+    --muted-foreground: black; /* Black */
 
-    --muted: 46 81% 94%; /* F9EBC7 */
-    --muted-foreground: 26 27% 58%; /* B99470 */
+    --accent: 180 100% 80%; /* Aqua */
+    --accent-foreground: 0 0% 100%; /* White */
 
-    --accent: 26 27% 58%; /* B99470 */
-    --accent-foreground: 51 16% 98%; /* FEFAE0 */
+    --destructive: 0 100% 70%; /* Bright Red */
+    --destructive-foreground: 0 0% 100%; /* White */
 
-    --destructive: 21 73% 44%; /* C4661F */
-    --destructive-foreground: 51 16% 98%; /* FEFAE0 */
-
-    --border: 80 20% 62%; /* A9B388 */
-    --input: 80 20% 62%; /* A9B388 */
-    --ring: 77 15% 38%; /* 5F6F52 */
+    --border: 180 100% 80%; /* Aqua */
+    --input: 180 100% 80%; /* Aqua */
+    --ring: 220 100% 60%; /* Bright Blue */
 
     --radius: 0.5rem;
   }
-
+  
   .dark {
-    --background: 77 15% 38%; /* 5F6F52 */
-    --foreground: 51 16% 98%; /* FEFAE0 */
-
-    --card: 80 20% 62%; /* A9B388 */
-    --card-foreground: 51 16% 98%; /* FEFAE0 */
-
-    --popover: 77 15% 38%; /* 5F6F52 */
-    --popover-foreground: 51 16% 98%; /* FEFAE0 */
-
-    --primary: 51 16% 98%; /* FEFAE0 */
-    --primary-foreground: 77 15% 38%; /* 5F6F52 */
-
-    --secondary: 46 81% 94%; /* F9EBC7 */
-    --secondary-foreground: 77 15% 38%; /* 5F6F52 */
-
-    --muted: 26 27% 58%; /* B99470 */
-    --muted-foreground: 46 81% 94%; /* F9EBC7 */
-
-    --accent: 21 73% 44%; /* C4661F */
-    --accent-foreground: 51 16% 98%; /* FEFAE0 */
-
-    --destructive: 21 66% 28%; /* 783D19 */
-    --destructive-foreground: 51 16% 98%; /* FEFAE0 */
-
-    /* --border: none; B99470 */
-    --input: 26 27% 58%; /* B99470 */
-    --ring: 46 81% 94%; /* F9EBC7 */
+    --background: 220 60% 20%; /* Dark Navy */
+    --foreground: 210 100% 95%; /* Light Sky Blue */
+    
+    --card: 180 100% 80%; /* Aqua */
+    --card-foreground: 210 100% 95%; /* Light Sky Blue */
+    
+    --popover: 220 60% 20%; /* Dark Navy */
+    --popover-foreground: 155 100% 50%; /* Neon Green */
+    
+    --primary: 0 0% 100%; /* White */
+    --primary-foreground: 220 100% 60%; /* Bright Blue */
+    
+    --secondary: 200 80% 90%; /* Soft Blue */
+    --secondary-foreground: 220 60% 20%; /* Dark Navy */
+    
+    --muted: 210 50% 30%; /* Slate Blue */
+    --muted-foreground: 200 80% 90%; /* Soft Blue */
+    
+    --accent: 180 100% 80%; /* Aqua */
+    --accent-foreground: 0 0% 100%; /* White */
+    
+    --destructive: 0 60% 35%; /* Dark Red */
+    --destructive-foreground: 210 100% 95%; /* Light Sky Blue */
+    
+    --input: 210 50% 30%; /* Slate Blue */
+    --ring: 200 80% 90%; /* Soft Blue */
+    html, body {
+      @apply bg-cover bg-fixed bg-center bg-no-repeat;
+      /* background-image: url('/vecteezy_starry-night-sky-with-stars-and-moon-in-cloudscape-background_7710509_dark2.jpg'); */
+      background-image: url('/pexels-eberhardgross-2098427.jpg');
+      /* background-position: 20% 20%; */
+    }
+  }
+  .light {
+    html, body {
+      /* background-color: white; */
+      @apply bg-cover bg-fixed bg-center bg-no-repeat;
+      background-image: url('/nB460uc.jpg');
+    }
   }
 }
+
+
 
 html, body {
   @apply bg-cover bg-fixed bg-center bg-no-repeat;
@@ -73,16 +87,30 @@ html, body {
 
 @layer base {
   * {
-    @apply border-border cursor-none;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  @media (min-aspect-ratio: 3/4) {
+    body {
+      cursor: none;
+    }
+    body * {
+      cursor: none;
+    }
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer components {
+  .card-on-hover {
+    @apply transition-colors duration-200 ease-in-out group-hover:text-popover-foreground;
   }
 }
