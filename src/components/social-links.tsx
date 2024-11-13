@@ -22,8 +22,7 @@ export default function SocialLinks() {
 
 
   return (
-    <div ref={contactRef} className="grid grid-cols-2 xs:flex justify-center lg:justify-start items-center">
-      <ThemeSwitch />
+    <div ref={contactRef} className="flex flex-wrap justify-center gap-2 my-10 w-full">
       <HotLink
         href="https://github.com/gizmo572" 
         target="_blank" rel="noopener noreferrer" className='sphere flex items-center justify-center rounded-full p-4'>
@@ -32,7 +31,7 @@ export default function SocialLinks() {
           alt="github"
           width={50}
           height={50}
-          className='hover:opacity-80 hover:animate-pulse dark:invert min-w-[50px] min-h-auto'
+          className='hover:opacity-80 hover:animate-pulse dark:invert object-contain'
         />
       </HotLink>
       <HotLink 
@@ -56,6 +55,7 @@ export default function SocialLinks() {
           className='hover:opacity-80 hover:animate-pulse dark:fill-white min-w-[50px] min-h-auto'
         />
       </HotLink>
+      <ThemeSwitch />
     </div>
   )
 }
