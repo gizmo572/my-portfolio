@@ -95,7 +95,7 @@ export const DefaultSkills: Skill[] = [
 ]
 
 export const AwsSkills: Skill[] = [
-  { title: 'Lambda', icon: '/skills/aws/lambda.svg'},
+  { title: 'Lambda', icon: '/skills/aws/Lambda.svg'},
   { title: 'CloudFormation', icon: '/skills/aws/CloudFormation.svg'},
   { title: 'ECS', icon: '/skills/aws/ECS.svg'},
   { title: 'S3', icon: '/skills/aws/S3.svg'},
