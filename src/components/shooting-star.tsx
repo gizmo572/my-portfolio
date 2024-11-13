@@ -6,14 +6,14 @@ import { useState, forwardRef, useEffect } from "react";
 
 
 interface ShootingStarProps {
-  shootingStars?: boolean; // New prop for shooting stars
+  shootingStars?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
 
 const ShootingStar = forwardRef<HTMLDivElement, ShootingStarProps>(({
-  shootingStars = true, // Default is false
+  shootingStars = true,
   className,
   style
 }, ref) => {
@@ -35,7 +35,7 @@ const ShootingStar = forwardRef<HTMLDivElement, ShootingStarProps>(({
 
               setStar(newStar);
 
-          }, 350 * 10); // Interval between 5-10 seconds
+          }, 350 * 10);
 
           return () => clearInterval(interval);
       }
@@ -59,7 +59,7 @@ const ShootingStar = forwardRef<HTMLDivElement, ShootingStarProps>(({
                 height: '1px',
                 background: `linear-gradient(to ${star.direction}, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))`, // Horizontal gradient for trail
                 animation: `${star.direction === 'left' ? 'shooting-star' : 'shooting-star-reverse'} ${0.25 * 10}s linear forwards`,
-                perspective: '1000px', // Set perspective to simulate depth
+                perspective: '1000px',
                 ...style,
             }}
             />

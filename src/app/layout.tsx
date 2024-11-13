@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { MobileProvider } from "@/components/mobile-context";
 import { ThemeProvider } from "next-themes"
 import { HotNavigationProvider } from "hot-nav";
 import CustomCursor from "@/components/custom-cursor";
@@ -30,16 +31,18 @@ export default function RootLayout({
   return (
     <html lang="en suppressHydrationWarning">
       <body className="overflow-x-hidden">
-        <div className={`${geistSans.variable} ${geistMono.variable } antialiased mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:px-12 md:py-20 lg:py-0`}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Background />
-          <HotNavigationProvider addCustomStyles={false} defaultHotKeysOn={true} >
-            <CustomCursor>
-              {children}
-            </CustomCursor>
-          </HotNavigationProvider>
-        </ThemeProvider>
-        </div>
+          <div className={`${geistSans.variable} ${geistMono.variable } antialiased mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:px-12 md:py-20 lg:py-0`}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <MobileProvider>
+                <Background />
+                <HotNavigationProvider addCustomStyles={false} defaultHotKeysOn={true} >
+                <CustomCursor>
+                  {children}
+                </CustomCursor>
+                </HotNavigationProvider>
+              </MobileProvider>
+            </ThemeProvider>
+          </div>
       </body>
     </html>
   );

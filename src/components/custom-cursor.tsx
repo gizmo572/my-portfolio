@@ -10,7 +10,7 @@ import { useEventListener } from '@/lib/custom-hooks';
  */
 
 import React, { useRef, useEffect, useState, useCallback, CSSProperties, ReactNode, HTMLAttributes } from 'react';
-
+import { useMobile } from '@/components/mobile-context';
 interface WrapperProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
@@ -44,22 +44,7 @@ const CustomCursor: React.FC<CustomCursorProps> = ({
   const [isActiveClickable, setIsActiveClickable] = useState(false);
   const endX = useRef(0);
   const endY = useRef(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-
-  useEffect(() => {
-    if (typeof window == 'undefined') return;
-
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= window.innerHeight * 0.75);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const { isMobile } = useMobile();
 
   const onMouseMove = useCallback((event: MouseEvent) => {
     const { clientX, clientY } = event;
@@ -200,9 +185,6 @@ const CustomCursor: React.FC<CustomCursorProps> = ({
 
   const styles: { cursorOuter: CSSProperties; cursorInner: CSSProperties } = isMobile
     ? {
-      // cursor: {
-      //   display: 'none',
-      // },
       cursorInner: {
         display: 'none',
       },
