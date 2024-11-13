@@ -64,7 +64,6 @@
     --ring: 200 80% 90%; /* Soft Blue */
     html, body {
       @apply bg-cover bg-fixed bg-center bg-no-repeat;
-      /* background-image: url('/vecteezy_starry-night-sky-with-stars-and-moon-in-cloudscape-background_7710509_dark2.jpg'); */
       background-image: url('/pexels-eberhardgross-2098427.jpg');
       /* background-position: 20% 20%; */
     }
@@ -78,12 +77,6 @@
   }
 }
 
-
-
-html, body {
-  @apply bg-cover bg-fixed bg-center bg-no-repeat;
-  background-image: url('/abstract_background_with_low_poly_technology_design_3004_generated.jpg');
-}
 
 @layer base {
   * {

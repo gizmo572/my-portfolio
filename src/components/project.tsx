@@ -16,20 +16,21 @@ interface ProjectProps {
     demo: string;
   };
   projectCardsRef: React.RefObject<HTMLDivElement[]>;
+  projectsLoaded: boolean;
   idx: number;
 }
 
-export default function Project({ project, projectCardsRef, idx }: ProjectProps) {
+export default function Project({ project, projectCardsRef, projectsLoaded, idx }: ProjectProps) {
   const { title, description, overview, demo } = project
   const toggleHotKeysButtonRef = useRef<HTMLButtonElement>(null)
 
   useGSAP(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    if (!prefersReducedMotion && projectCardsRef?.current) {
+    if (!prefersReducedMotion && projectCardsRef?.current && projectsLoaded) {
       onHoverBobAnimation(projectCardsRef.current[idx])
     }
-  }, [projectCardsRef])
+  }, [projectCardsRef, projectsLoaded])
 
 
   const simulateControlKeyClick = (e: React.MouseEvent<HTMLSpanElement>) => {

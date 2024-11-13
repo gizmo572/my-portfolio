@@ -42,7 +42,6 @@ export const onHoverBobAnimation = (cardRef: HTMLDivElement) => {
   
   function hoverOn() {
     hover = true
-    console.log(tween.totalProgress())
     tween.play()
     if(tween.totalProgress() == 1){
       tween.restart()
@@ -60,7 +59,7 @@ export const onHoverBobAnimation = (cardRef: HTMLDivElement) => {
   }
 }
 
-export const onLoadSimultaneousAnimation = (cardRef: HTMLDivElement[]) => {
+export const onLoadSimultaneousAnimation = (cardRef: HTMLDivElement[], onComplete: () => void) => {
 
   gsap.registerPlugin(ScrollTrigger)
     const t1 = gsap.timeline({
@@ -70,7 +69,8 @@ export const onLoadSimultaneousAnimation = (cardRef: HTMLDivElement[]) => {
           end: '+=0', // end immediately after starting, so it doesn't stretch beyond the start
           scrub: false, // disable scrubbing, so the animation happens all at once
           once: true // trigger the animation only once
-      }
+      },
+      onComplete: onComplete,
     });
   // const t1 = gsap.timeline({ defaults: { ease: 'power3.out' } });
 

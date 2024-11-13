@@ -21,7 +21,7 @@ export default function ThemeSwitch() {
   return (
     <HotLink className='sphere flex items-center justify-center rounded-full p-4'>
       <button
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         className="p-2 rounded-2 transition-colors duration-200 transform hover:-translate-y-0.5 hover:animate-pulse"
         aria-label="Toggle theme"
       >
