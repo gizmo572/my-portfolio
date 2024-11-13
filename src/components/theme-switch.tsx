@@ -25,7 +25,7 @@ export default function ThemeSwitch() {
         className="p-2 rounded-2 transition-colors duration-200 transform hover:-translate-y-0.5 hover:animate-pulse"
         aria-label="Toggle theme"
       >
-        { theme === 'dark' ? <Sun size={50} /> : theme === 'light' ? <Moon size={50} /> : <div>test</div>}
+        { theme === 'light' ? <Moon size={50} /> : <Sun size={50} />}
       </button>
     </HotLink>
   )
