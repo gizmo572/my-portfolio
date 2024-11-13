@@ -31,11 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en suppressHydrationWarning">
       <body className="overflow-x-hidden">
+        <div className="dark:bg-black/80">
           <div className={`${geistSans.variable} ${geistMono.variable } antialiased mx-auto min-h-screen max-w-screen-xl py-12 font-sans md:px-12 md:py-20 lg:py-0`}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <MobileProvider>
                 <Background />
-                <HotNavigationProvider addCustomStyles={false} defaultHotKeysOn={true} >
+                <HotNavigationProvider addCustomStyles={false} defaultHotKeysOn={false} >
                 <CustomCursor>
                   {children}
                 </CustomCursor>
@@ -43,6 +44,7 @@ export default function RootLayout({
               </MobileProvider>
             </ThemeProvider>
           </div>
+        </div>
       </body>
     </html>
   );

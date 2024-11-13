@@ -64,13 +64,11 @@
     --ring: 200 80% 90%; /* Soft Blue */
     html, body {
       @apply bg-cover bg-fixed bg-center bg-no-repeat;
-      background-image: url('/pexels-eberhardgross-2098427.jpg');
-      /* background-position: 20% 20%; */
+      background-image: url('/olena-bohovyk-Cq5NaI0yKBE-unsplash.jpg');
     }
   }
   .light {
     html, body {
-      /* background-color: white; */
       @apply bg-cover bg-fixed bg-center bg-no-repeat;
       background-image: url('/nB460uc.jpg');
     }
