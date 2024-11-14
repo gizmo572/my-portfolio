@@ -21,7 +21,7 @@ export const workExperienceData = [
     company: "Monyverse",
     position: "Software Engineer",
     duration: "Sept 2023 - Present",
-    description: "Led development of cloud-based solutions, improving system efficiency by 40%.",
+    description: "Led development of cloud-based solutions, working with AWS services including ECS, Lambda, RDS, S3, CloudFormation, SQS, etc.",
     icon: "/experience/dom-logo.svg",
     background: "",
     href: "https://www.monyverse.com"
@@ -30,7 +30,7 @@ export const workExperienceData = [
     company: "React Relay",
     position: "Software Engineer",
     duration: "Sept 2022 - Sept 2023",
-    description: "Developed and maintained multiple web applications using React and Node.js.",
+    description: "Developed a visualization tool for React applications, allowing developers to quickly identify the context of React components in the overall scope of the application, as well as how they interact with servers.",
     icon: "/experience/react-relay.png",
     background: "",
     href: "https://reactrelay.com"
@@ -38,7 +38,7 @@ export const workExperienceData = [
   {
     company: "Professional Poker Player",
     position: "Self-Employed",
-    duration: "June 2013 - Augu 2022",
+    duration: "June 2013 - Aug 2022",
     description: "",
     icon: "",
     background: "",
@@ -71,10 +71,10 @@ export const projectData = [
   },
   {
     title: "Portfolio",
-    description: "this is my portfolio this is my portfolio this is my portfolio this is my portfolio this is my portfolio this is my portfolio",
+    description: "Developed with Next.js, TypeScript, and Tailwind CSS",
     overview: "",
     // TODO: add href
-    href: "https://www.npmjs.com/package/hot-nav",
+    href: "https://www.github.com/gizmo572/my-portfolio",
     demo: ""
   }
 ]

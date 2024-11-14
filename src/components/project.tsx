@@ -15,22 +15,21 @@ interface ProjectProps {
     href: string;
     demo: string;
   };
-  projectCardsRef: React.RefObject<HTMLDivElement[]>;
-  projectsLoaded: boolean;
   idx: number;
 }
 
-export default function Project({ project, projectCardsRef, projectsLoaded, idx }: ProjectProps) {
+export default function Project({ project, idx }: ProjectProps) {
   const { title, description, overview, demo } = project
   const toggleHotKeysButtonRef = useRef<HTMLButtonElement>(null)
+  const projectCardRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    if (!prefersReducedMotion && projectCardsRef?.current && projectsLoaded) {
-      onHoverBobAnimation(projectCardsRef.current[idx])
+    if (!prefersReducedMotion && projectCardRef?.current) {
+      onHoverBobAnimation(projectCardRef.current)
     }
-  }, [projectCardsRef, projectsLoaded])
+  }, [projectCardRef])
 
 
   const simulateControlKeyClick = (e: React.MouseEvent<HTMLSpanElement>) => {
@@ -50,9 +49,7 @@ export default function Project({ project, projectCardsRef, projectsLoaded, idx 
 
   return (
     <Card 
-      ref={(el) => {
-        if (el && projectCardsRef.current) projectCardsRef.current[idx] = el
-      }}
+      ref={projectCardRef}
       className={`backdrop-blur-xl dark:backdrop-blur-lg bg-secondary/10 hover:bg-secondary/20 m-2 border-none transform animate-fade-in animation-delay-${idx * 200 + 200} group`}
     >
       <Dialog>
